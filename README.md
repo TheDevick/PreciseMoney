@@ -19,8 +19,8 @@ use TheDevick\PreciseMoney\Calculator\BCMathCalculator;
 use TheDevick\PreciseMoney\Money;
 
 $money = new Money('10', new BCMathCalculator(2)); // Start with $10, using the BCMathCalculator with scale 2 (The default is using scale 10)
-$money = $money->addMoney(new Money('3')); // Add $3.00
-$money = $money->add('5.5'); // Add $5.50
+$money->addMoney(new Money('3')); // Add $3.00
+$money->add('5.5'); // Add $5.50
 
 return json_encode($money); // Returns {"amount":"18.50"}
 ```
