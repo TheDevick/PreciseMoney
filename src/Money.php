@@ -25,69 +25,53 @@ class Money implements \JsonSerializable, \Stringable
     /**
      * @param numeric-string $amount
      */
-    public function add(string $amount): self
+    public function add(string $amount): Money
     {
-        $this->amount = $this->calculator->add($this->amount, $amount);
-
-        return $this;
+        return new Money($this->calculator->add($this->amount, $amount), $this->calculator);
     }
 
     /**
      * @param numeric-string $amount
      */
-    public function sub(string $amount): self
+    public function sub(string $amount): Money
     {
-        $this->amount = $this->calculator->sub($this->amount, $amount);
-
-        return $this;
+        return new Money($this->calculator->sub($this->amount, $amount), $this->calculator);
     }
 
     /**
      * @param numeric-string $amount
      */
-    public function mul(string $amount): self
+    public function mul(string $amount): Money
     {
-        $this->amount = $this->calculator->mul($this->amount, $amount);
-
-        return $this;
+        return new Money($this->calculator->mul($this->amount, $amount), $this->calculator);
     }
 
     /**
      * @param numeric-string $amount
      */
-    public function div(string $amount): self
+    public function div(string $amount): Money
     {
-        $this->amount = $this->calculator->div($this->amount, $amount);
-
-        return $this;
+        return new Money($this->calculator->div($this->amount, $amount), $this->calculator);
     }
 
-    public function addMoney(Money $money): self
+    public function addMoney(Money $money): Money
     {
-        $this->amount = $this->calculator->add($this->amount, $money->amount);
-
-        return $this;
+        return $this->add($money->getAmount());
     }
 
-    public function subMoney(Money $money): self
+    public function subMoney(Money $money): Money
     {
-        $this->amount = $this->calculator->sub($this->amount, $money->amount);
-
-        return $this;
+        return $this->sub($money->getAmount());
     }
 
-    public function mulMoney(Money $money): self
+    public function mulMoney(Money $money): Money
     {
-        $this->amount = $this->calculator->mul($this->amount, $money->amount);
-
-        return $this;
+        return $this->mul($money->getAmount());
     }
 
-    public function divMoney(Money $money): self
+    public function divMoney(Money $money): Money
     {
-        $this->amount = $this->calculator->div($this->amount, $money->amount);
-
-        return $this;
+        return $this->div($money->getAmount());
     }
 
     /**

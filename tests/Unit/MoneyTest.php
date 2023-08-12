@@ -33,21 +33,43 @@ class MoneyTest extends TestCase
         $money->div('3E2');
     }
 
-    public function testCalculationMethodsIsChangingAmount(): void
+    public function testCalculationMethods(): void
+    {
+        $money = new Money('10.50', new BCMathCalculator(2));
+
+        $this->assertSame('10.80', $money->add('0.30')->getAmount());
+        $this->assertSame('7.70', $money->sub('2.80')->getAmount());
+        $this->assertSame('2.62', $money->div('4.00')->getAmount());
+        $this->assertSame('5.25', $money->mul('0.50')->getAmount());
+        $this->assertSame('31.50', $money->mul('3.00')->getAmount());
+    }
+
+    public function testCalculationMethodsWithMoney(): void
+    {
+        $money = new Money('10.50', new BCMathCalculator(2));
+
+        $this->assertSame('10.80', $money->addMoney(new Money('0.30'))->getAmount());
+        $this->assertSame('7.70', $money->subMoney(new Money('2.80'))->getAmount());
+        $this->assertSame('2.62', $money->divMoney(new Money('4.00'))->getAmount());
+        $this->assertSame('5.25', $money->mulMoney(new Money('0.50'))->getAmount());
+        $this->assertSame('31.50', $money->mulMoney(new Money('3.00'))->getAmount());
+    }
+
+    public function testCalculationMethodsIsNotChangingAmount(): void
     {
         $money = new Money('10.5', new BCMathCalculator(1));
 
         $money->add('0.3');
-        $this->assertSame('10.8', $money->getAmount());
+        $this->assertSame('10.5', $money->getAmount());
 
         $money->sub('2.8');
-        $this->assertSame('8.0', $money->getAmount());
+        $this->assertSame('10.5', $money->getAmount());
 
         $money->div('2');
-        $this->assertSame('4.0', $money->getAmount());
+        $this->assertSame('10.5', $money->getAmount());
 
         $money->mul('0.5');
-        $this->assertSame('2.0', $money->getAmount());
+        $this->assertSame('10.5', $money->getAmount());
     }
 
     public function testCalculationMethodsWithMoneyIsChangingAmount(): void
@@ -55,15 +77,15 @@ class MoneyTest extends TestCase
         $money = new Money('10.5', new BCMathCalculator(1));
 
         $money->addMoney(new Money('0.3'));
-        $this->assertSame('10.8', $money->getAmount());
+        $this->assertSame('10.5', $money->getAmount());
 
         $money->subMoney(new Money('2.8'));
-        $this->assertSame('8.0', $money->getAmount());
+        $this->assertSame('10.5', $money->getAmount());
 
         $money->divMoney(new Money('2'));
-        $this->assertSame('4.0', $money->getAmount());
+        $this->assertSame('10.5', $money->getAmount());
 
         $money->mulMoney(new Money('0.5'));
-        $this->assertSame('2.0', $money->getAmount());
+        $this->assertSame('10.5', $money->getAmount());
     }
 }
