@@ -6,6 +6,8 @@
 [![PsalmBadge](https://img.shields.io/badge/📌%20Psalm-Static%20Analysis-red?style=for-the-badge)](https://psalm.dev/)
 [![SemanticReleaseBadge](https://img.shields.io/badge/semantic--release-angular-e10079?logo=semantic-release&style=for-the-badge)](https://github.com/semantic-release/semantic-release)
 
+![Precise Money](https://github.com/TheDevick/PreciseMoney/assets/71853418/8d3d229e-c1ec-44ff-a050-2d5a46a31ca7)
+
 ## The Money Object
 
 The Money class is a **mutable** class, that represent an amount of money. You can add, subtract, multiply and divide the amount in the object with numeric-string or other Money object. Also, the Money Class is Json Serializable and Stringable.
