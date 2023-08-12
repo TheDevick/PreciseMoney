@@ -1,0 +1,33 @@
+{
+    "name": "thedevick/precise-money",
+    "description": "Manipulate money precisely with PHP.",
+    "license": "MIT",
+    "homepage": "https://github.com/TheDevick/PreciseMoney",
+    "prefer-stable": true,
+    "autoload": {
+        "psr-4": {
+            "TheDevick\\PreciseMoney\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "TheDevick\\PreciseMoneyTests\\": "tests/"
+        }
+    },
+    "authors": [
+        {
+            "name": "TheDevick",
+            "email": "erick@bilhalba.com.br",
+            "homepage": "https://TheDevick.vercel.app"
+        }
+    ],
+    "require": {
+        "ext-bcmath": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^10.2",
+        "symfony/var-dumper": "^6.2",
+        "vimeo/psalm": "^5.13",
+        "friendsofphp/php-cs-fixer": "^3.21"
+    }
+}
