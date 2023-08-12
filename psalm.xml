@@ -6,7 +6,6 @@
         <directory name="src" />
         <directory name="tests" />
         <ignoreFiles>
-            <directory name="docs" />
             <directory name="vendor" />
         </ignoreFiles>
     </projectFiles>
