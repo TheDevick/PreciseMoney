@@ -18,16 +18,20 @@ The Money class is an **immutable** class, that represent an amount of money. Yo
 use TheDevick\PreciseMoney\Calculator\BCMathCalculator;
 use TheDevick\PreciseMoney\Money;
 
-$money = new Money('10', new BCMathCalculator(2)); // Start with $10, using the BCMathCalculator with scale 2 (The default is using scale 10)
-$money->addMoney(new Money('3')); // Add $3.00
-$money->add('5.5'); // Add $5.50
+$money = new Money('10', new BCMathCalculator(3)); // Start with $10.000, using the BCMathCalculator with scale 3 (The default is using scale 10)
+$money = $money->addMoney(new Money('3')); // Add $3.000
+$money = $money->add('5.235'); // Add $5.235
 
-return json_encode($money); // Returns {"amount":"18.50"}
+return json_encode($money); // Returns {"amount":"18.235"}
 ```
 
 ### Internally
 
 Internally, the Money object stores the amount in an numeric-string.
+
+## Why use Precise Money?
+
+This package provides an way to calculate money precisely. In other libraries,that stores the amount as cents as an integer,you can't calculate, for example, the price per kWh, since the price per kWh usally have more than 4 decimals. But since the Precise Money package stores the amount as an numeric-string, you can store many decimals as you wan't.
 
 ## Calculating
 
