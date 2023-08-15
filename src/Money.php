@@ -74,6 +74,37 @@ class Money implements \JsonSerializable, \Stringable
         return $this->div($money->getAmount());
     }
 
+    public function fix(int $decimals): Money
+    {
+        return new Money($this->fixToNumericString($decimals), $this->calculator);
+    }
+
+    /**
+     * @return numeric-string
+     */
+    public function fixToNumericString(int $decimals): string
+    {
+        return static::fixNumericString($this->getAmount(), $decimals);
+    }
+
+    /**
+     * @param numeric-string $amount
+     *
+     * @return numeric-string
+     */
+    public static function fixNumericString(string $amount, int $decimals): string
+    {
+        $value = sprintf('%0.'.$decimals.'f', $amount);
+
+        // Remove the "+" or "-" sign if the number is zero
+        if ('-0' === $value || '+0' === $value) {
+            $value = substr($value, 1);
+        }
+
+        /** @var numeric-string $value */
+        return $value;
+    }
+
     /**
      * @return array{amount: numeric-string}
      */

@@ -72,7 +72,7 @@ class MoneyTest extends TestCase
         $this->assertSame('10.5', $money->getAmount());
     }
 
-    public function testCalculationMethodsWithMoneyIsChangingAmount(): void
+    public function testCalculationMethodsWithMoneyIsNotChangingAmount(): void
     {
         $money = new Money('10.5', new BCMathCalculator(1));
 
@@ -87,5 +87,64 @@ class MoneyTest extends TestCase
 
         $money->mulMoney(new Money('0.5'));
         $this->assertSame('10.5', $money->getAmount());
+    }
+
+    public function testFixNumericString(): void
+    {
+        $format = 'Money::fixNumericString(amount: "%s", decimals: %s)';
+
+        $this->assertSame(
+            '10',
+            Money::fixNumericString($amount = '10.5', $decimals = 0),
+            sprintf($format, $amount, $decimals)
+        );
+
+        $this->assertSame(
+            '7.6',
+            Money::fixNumericString($amount = '7.555', $decimals = 1),
+            sprintf($format, $amount, $decimals)
+        );
+
+        $this->assertSame(
+            '10',
+            Money::fixNumericString($amount = '9.9', $decimals = 0),
+            sprintf($format, $amount, $decimals)
+        );
+
+        $this->assertSame(
+            '5.2500',
+            Money::fixNumericString($amount = '5.25', $decimals = 4),
+            sprintf($format, $amount, $decimals)
+        );
+
+        $this->assertSame(
+            '-10',
+            Money::fixNumericString($amount = '-10.5', $decimals = 0),
+            sprintf($format, $amount, $decimals)
+        );
+
+        $this->assertSame(
+            '-7.6',
+            Money::fixNumericString($amount = '-7.555', $decimals = 1),
+            sprintf($format, $amount, $decimals)
+        );
+
+        $this->assertSame(
+            '-10',
+            Money::fixNumericString($amount = '-9.9', $decimals = 0),
+            sprintf($format, $amount, $decimals)
+        );
+
+        $this->assertSame(
+            '-5.2500',
+            Money::fixNumericString($amount = '-5.25', $decimals = 4),
+            sprintf($format, $amount, $decimals)
+        );
+
+        $this->assertSame(
+            '0',
+            Money::fixNumericString($amount = '-0.09', $decimals = 0),
+            sprintf($format, $amount, $decimals)
+        );
     }
 }
