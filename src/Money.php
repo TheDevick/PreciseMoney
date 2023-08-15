@@ -74,12 +74,21 @@ class Money implements \JsonSerializable, \Stringable
         return $this->div($money->getAmount());
     }
 
+    /**
+     * Fix the current amount and return a new Money object. Example: "10.235" with 2 decimals -> "10.23"
+     *
+     * @param integer $decimals
+     * 
+     * @return Money
+     */
     public function fix(int $decimals): Money
     {
         return new Money($this->fixToNumericString($decimals), $this->calculator);
     }
 
     /**
+     * Fix the current amount and return the numeric string. Example: "10.235" with 2 decimals -> "10.23"
+     * 
      * @return numeric-string
      */
     public function fixToNumericString(int $decimals): string
@@ -88,6 +97,8 @@ class Money implements \JsonSerializable, \Stringable
     }
 
     /**
+     * Fix the amount and return the numeric string. Example: "10.235" with 2 decimals -> "10.23"
+     * 
      * @param numeric-string $amount
      *
      * @return numeric-string
