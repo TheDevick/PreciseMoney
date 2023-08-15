@@ -10,10 +10,11 @@ class BCMathCalculatorTest extends TestCase
 {
     use CalculatorTestTrait;
 
-    public function testAddWithScale1(): void
+    public function testCalculationMethods(): void
     {
-        $this->assertCalculatorAddMethodComplete(new BCMathCalculator(1));
-        $this->assertCalculatorAddMethodComplete(new BCMathCalculator(2));
-        $this->assertCalculatorAddMethodComplete(new BCMathCalculator(3));
+        $this->assertCalculatorAddMethodComplete(new BCMathCalculator(5));
+        $this->assertCalculatorSubMethodComplete(new BCMathCalculator(5));
+        $this->assertCalculatorMulMethodComplete(new BCMathCalculator(5));
+        $this->assertCalculatorDivMethodComplete(new BCMathCalculator(5));
     }
 }
